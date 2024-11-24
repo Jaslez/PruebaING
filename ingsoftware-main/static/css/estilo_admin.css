@@ -1,0 +1,30 @@
+/* Estilos adicionales para la barra lateral */
+.sidebar {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+.sidebar a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 15px;
+  display: block;
+}
+
+.sidebar a:hover {
+  background-color: #495057;
+}
+
+/* Estilo para la sección activa */
+.content-section {
+  display: none; /* Ocultas por defecto */
+}
+
+.content-section.active {
+  display: block; /* Mostrar la sección seleccionada */
+}
+
+/* Botón cerrar sesión */
+.logout {
+  color: #dc3545;
+}

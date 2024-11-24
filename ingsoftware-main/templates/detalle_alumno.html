@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Alumno - Colegio XYZ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Detalle del Alumno - Colegio XYZ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-danger text-white" href="/logout">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Detalles del Alumno: {{ alumno.nombre }}</h2>
+            <button class="btn btn-secondary" onclick="location.href='/docente'">Volver al Panel del Docente</button>
+        </div>
+
+        <!-- Información del Alumno -->
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title">Información del Alumno</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Nombre:</strong> {{ alumno.nombre }}</p>
+                <p><strong>Correo Electrónico:</strong> {{ alumno.email }}</p>
+                <p><strong>Curso Actual:</strong> {{ alumno.curso.nombre }}</p>
+                <p><strong>Fecha de Inscripción:</strong> {{ alumno.fecha_inscripcion }}</p>
+            </div>
+        </div>
+
+        <!-- Tabla de Tareas del Alumno -->
+        <h4 class="mt-5">Tareas del Alumno</h4>
+        <table class="table table-hover table-bordered table-responsive">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Título de la Tarea</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Calificación</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarea in tareas %}
+                <tr>
+                    <td>{{ tarea.titulo }}</td>
+                    <td>{{ tarea.curso.nombre }}</td>
+                    <td>{{ tarea.estado }}</td>
+                    <td>{% if tarea.calificacion %}{{ tarea.calificacion }}{% else %}Sin calificar{% endif %}</td>
+                    <td>
+                        <button class="btn btn-info btn-sm" onclick="location.href='/docente/tarea/{{ tarea.id }}/detalle'">
+                            <i class="fas fa-eye"></i> Ver Detalles
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<h2>Entregas del Curso: {{ curso.nombre }}</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Alumno</th>
+            <th>Tarea</th>
+            <th>Archivo</th>
+            <th>Fecha de Entrega</th>
+            <th>Calificación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entrega in entregas %}
+        <tr>
+            <td>{{ entrega.alumno.username }}</td>
+            <td>{{ entrega.tarea.titulo }}</td>
+            <td><a href="{{ entrega.archivo.url }}">Descargar</a></td>
+            <td>{{ entrega.fecha_entrega }}</td>
+            <td>{{ entrega.calificacion|default:"Sin calificar" }}</td>
+            <td>
+                <a href="{% url 'calificar_tarea' entrega.id %}" class="btn btn-warning">Calificar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No hay entregas para este curso.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
